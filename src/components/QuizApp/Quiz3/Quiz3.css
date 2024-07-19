@@ -1,0 +1,13 @@
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    background-color: gray !important;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    width: 30px !important;
+}
+
+.carousel-item {
+    padding: 10px 60px !important;
+}
