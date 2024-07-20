@@ -38,7 +38,7 @@ const Header = () => {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{marginLeft : "20px"}}>
           {navMenu.map(item => (
-            <Fragment key={item}>
+            <Fragment key={item.RouteLink}>
                 <li className="nav-item">
              <a className="nav-link active" aria-current="page" href="#" role='button' onClick={() => handleNavigate(item.RouteLink)}>
               {item.pathName}
