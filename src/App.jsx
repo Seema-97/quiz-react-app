@@ -9,6 +9,7 @@ import './App.css'
 import Header from './components/Header/Header'
 import Home from './pages/Home/Home'
 import Questions from './pages/Questions/Questions'
+import Quiz from './pages/Quiz/Quiz'
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
      <Routes>
       <Route path='/home' element ={<Home/>}/>
       <Route path='/questions' element ={<Questions/>}/>
+      <Route path='/quiz' element ={<Quiz/>}/>
      </Routes>
     </>
   )

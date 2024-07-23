@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
     {
         pathName : 'Questions' ,
         RouteLink : '/questions'
+    },
+    {
+        pathName : 'Quiz' ,
+        RouteLink : '/quiz'
     }
  ] ;
 
@@ -47,11 +51,11 @@ const Header = () => {
             </Fragment>
           )) }
       </ul>
-      <div className="d-flex" style={{marginRight : "300px"}}>
+      {/* <div className="d-flex" style={{marginRight : "300px"}}>
         <button className="btn btn-primary" type="submit">
           Login
         </button>
-      </div>
+      </div> */}
     </div>
   </div>
 </nav>
