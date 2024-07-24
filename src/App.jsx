@@ -20,13 +20,16 @@ function App() {
      {/* <Quiz2 /> */}
      {/* <Quiz3 /> */}
 
-     <Header />
+      <Header />
 
      <Routes>
       <Route path='/home' element ={<Home/>}/>
       <Route path='/questions' element ={<Questions/>}/>
       <Route path='/quiz' element ={<Quiz/>}/>
-     </Routes>
+     </Routes> 
+
+    
+   
     </>
   )
 }
