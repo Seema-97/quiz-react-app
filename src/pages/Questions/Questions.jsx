@@ -5,46 +5,18 @@ import { FIRESTORE } from "../../firebase.config";
 const optionNum = ["a", "b", "c", "d"];
 
 const Questions = () => {
-  const [questionNum, setQuestionNum] = useState({
-    questionNum: 0,
-  });
-
-  const [question, setQuestion] = useState({
-    question: "",
-  });
-
-  const [option, setOption] = useState({
-    a: "",
-    b: "",
-    c: "",
-    d: "",
-  });
-
-  const [answer, setAnswer] = useState({
-    answer: "",
-  });
 
 
+  const [question, setQuestion] = useState({});
 
-  const handleQuestionNum = (e) => {
-    const { name, value } = e.target;
-    setQuestionNum((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
+  const [option, setOption] = useState({});
+
+  const [answer, setAnswer] = useState({});
 
   const handleQuestion = (e) => {
     const { name, value } = e.target;
-    setQuestion((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
-  };
+    setQuestion({[name]: value});
+   }
 
   const handleOption = (e) => {
     const { name, value } = e.target;
@@ -59,21 +31,16 @@ const Questions = () => {
 
   const handleAnswer = (e) => {
     const { name, value } = e.target;
-    setAnswer((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+    setAnswer( {[name]: value});
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(questionNum, question);
-    console.log(option);
+    console.log( question);
+    console.log(inputValue);
 
     await addDoc(collection(FIRESTORE, "QuizQuestions"), {
-      ...questionNum,
+      inputValue ,
       ...question,
       ...option,
       ...answer,
@@ -98,12 +65,7 @@ const Questions = () => {
         }}
       >
         <div className="card" style={{ margin: "10px", padding: "30px" }}>
-          <label htmlFor="">Ques No:</label>
-          <input
-            type="number"
-            name="questionNum"
-            onChange={handleQuestionNum}
-          />
+          
           <textarea
             id="w3review"
             name="question"
