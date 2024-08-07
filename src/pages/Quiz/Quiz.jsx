@@ -10,18 +10,24 @@ import { FIRESTORE } from "../../firebase.config";
 import "./Quiz.css";
 import ResultsCard from "../../components/ResultsCard/ResultsCard";
 
+import { useNavigate } from "react-router-dom";
+import Attemtps from "./Attemtps";
+
 let LS = "credentials";
 let localData = JSON.parse(localStorage.getItem(LS));
 
 // console.log(localData);
 
-const Quiz = () => {
+const Quiz = ({onSendData}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [questionData, setQuestionData] = useState(null);
   const [takeQuiz, setTakeQuiz] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showAnswer, setShowAnswer] = useState([]);
   const [googleUserData, setGoogleUserData] = useState({});
+  const[attempts , setAttempts] = useState([])
+
+  console.log(onSendData)
 
   useEffect(() => {
     console.log(localData);
@@ -29,6 +35,7 @@ const Quiz = () => {
     if (localData) {
       setIsLoggedIn(true);
       handleGetQuestions();
+      handleGetUserAnswers() ;
     }
   }, []);
 
@@ -155,6 +162,34 @@ const Quiz = () => {
 
   // console.log(googleUserData) ;
 
+  
+  const navigate = useNavigate()
+ 
+  const handleAttemptButton = (item , path) => {
+    
+    // {item.info.userAnswers.map((item) => {
+    //     // <div className="card">
+    //     //   <p>Question Number :{item.questionNum}</p>
+    //     //   <p>Correct Answer :{item.correctAnswer}</p>
+    //     //   <p>Your Answer:{item.givenAnswer}</p>
+    //     //   <p style={{color:'blue'}}>Correct or incorrect :{item.correctOrIncorrect}</p>
+    //     // </div>
+
+    //     console.log(item.questionNum , item.question, item.correctAnswer ,item.givenAnswer , item.correctOrIncorrect)
+    // })}
+    setAttempts(item)
+    navigate(path) ;
+    // sendDataToParent();
+  
+  }
+  
+  // const sendDataToParent = () => {
+  //   const data = "Some data from child";
+  //   onSendData(data);
+  // };
+
+  
+
   return (
     <>
       <div className="quiz-container">
@@ -246,29 +281,38 @@ const Quiz = () => {
           Submit
         </button>
 
-        <ResultsCard showAnswer={showAnswer} />
+       <div className="display" style={{display:'flex' ,alignItems:'center'  , border:'2px solid red'}}>
+        {showAnswer.map((item, index) => (
+          
+          //  (index === showAnswer.length - 1 )?  (<>
+          //     <Fragment key={item.id}>
+          //     {item.info.userAnswers.map((item) => (
+          //       <Fragment key={item.questionID}>
+          //         <div className="card">
+          //           <p>Question Number :{item.questionNum}</p>
+          //           <p>Correct Answer :{item.correctAnswer}</p>
+          //           <p>Your Answer:{item.givenAnswer}</p>
+          //           <p style={{color:'blue'}}>Correct or incorrect :{item.correctOrIncorrect}</p>
+          //         </div>
+          //       </Fragment>
+          //     ))}
+          //   </Fragment>
+          //   </>) : '' 
+        
+         
+          <div className="card" style={{border:'2px solid green' , padding:'0 30px'}} key={item.id}>
+                 <h1>{`Attempt ${index + 1}`}</h1>
+             
+
+              <button onClick={() => handleAttemptButton(item , `/attempts`)}>View Details</button>
+
+      
+            </div>
 
 
-        {/* {showAnswer.map((item, index) => (
 
-          (index === showAnswer.length - 1) && (<>
-            <Fragment key={item.id}>
-              {item.info.userAnswers.map((item) => (
-                <Fragment key={item.questionID}>
-                  <div className="card">
-                    <p>Question Number :{item.questionNum}</p>
-                    <p>Correct Answer :{item.correctAnswer}</p>
-                    <p>Your Answer:{item.givenAnswer}</p>
-                    <p style={{ color: 'blue' }}>Correct or incorrect :{item.correctOrIncorrect}</p>
-                  </div>
-                </Fragment>
-              ))}
-            </Fragment>
-          </>)
-
-
-
-        ))} */}
+        ))} 
+      </div>
       </div>
     </>
   );

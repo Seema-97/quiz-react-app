@@ -10,9 +10,14 @@ import Header from './components/Header/Header'
 import Home from './pages/Home/Home'
 import Questions from './pages/Questions/Questions'
 import Quiz from './pages/Quiz/Quiz'
+import Attemtps from './pages/Quiz/Attemtps'
 
 function App() {
   
+  // const handleData = (data) => {
+  //   console.log("Data received from child:", data);
+  //   // Do something with the data
+  // };
 
   return (
     <>
@@ -25,9 +30,12 @@ function App() {
      <Routes>
       <Route path='/home' element ={<Home/>}/>
       <Route path='/questions' element ={<Questions/>}/>
-      <Route path='/quiz' element ={<Quiz/>}/>
+      <Route path='/quiz' element ={<Quiz/>} 
+      // onSendData={handleData} 
+      />
+      <Route path= '/attempts' element={<Attemtps/>}/>
      </Routes> 
-
+      
     
    
     </>
