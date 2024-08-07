@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   getAuth,
   signInWithPopup,
@@ -8,6 +8,7 @@ import {
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { FIRESTORE } from "../../firebase.config";
 import "./Quiz.css";
+import ResultsCard from "../../components/ResultsCard/ResultsCard";
 
 let LS = "credentials";
 let localData = JSON.parse(localStorage.getItem(LS));
@@ -23,6 +24,8 @@ const Quiz = () => {
   const [googleUserData, setGoogleUserData] = useState({});
 
   useEffect(() => {
+    console.log(localData);
+
     if (localData) {
       setIsLoggedIn(true);
       handleGetQuestions();
@@ -49,17 +52,18 @@ const Quiz = () => {
     });
   };
 
-  // console.log(userAnswers) ;
+  console.log(localData);
 
   const handleSubmit = async () => {
     await addDoc(collection(FIRESTORE, "userAnswers"), {
+      uid: localData?.uid,
       userAnswers,
     })
       .then(() => {
-        alert("your answers are submitted") ;
+        alert("your answers are submitted");
 
       }
-    )
+      )
       .catch((err) => console.log(err));
 
     handleGetUserAnswers();
@@ -75,13 +79,15 @@ const Quiz = () => {
         info: doc.data(),
       };
 
-      temp.push(data);
+      if (data?.info?.uid === localData?.uid) {
+        temp.push(data);
+      }
     });
-    
+
     setShowAnswer(temp)
   };
 
-  // console.log(showAnswer);
+  console.log(showAnswer);
 
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -92,6 +98,7 @@ const Quiz = () => {
         let data = {
           userName: res.displayName,
           userEmail: res.email,
+          uid: res.uid,
         };
 
         localStorage.setItem(LS, JSON.stringify(data));
@@ -104,6 +111,7 @@ const Quiz = () => {
             let data = {
               userName: result.user.displayName,
               userEmail: result.user.email,
+              uid: res.uid,
             };
 
             addDoc(collection(FIRESTORE, "googleUsers"), {
@@ -238,39 +246,29 @@ const Quiz = () => {
           Submit
         </button>
 
+        <ResultsCard showAnswer={showAnswer} />
 
-        {showAnswer.map((item, index) => (
-          
-           (index === showAnswer.length - 1 )?  (<>
-              <Fragment key={item.id}>
+
+        {/* {showAnswer.map((item, index) => (
+
+          (index === showAnswer.length - 1) && (<>
+            <Fragment key={item.id}>
               {item.info.userAnswers.map((item) => (
                 <Fragment key={item.questionID}>
                   <div className="card">
                     <p>Question Number :{item.questionNum}</p>
                     <p>Correct Answer :{item.correctAnswer}</p>
                     <p>Your Answer:{item.givenAnswer}</p>
-                    <p style={{color:'blue'}}>Correct or incorrect :{item.correctOrIncorrect}</p>
+                    <p style={{ color: 'blue' }}>Correct or incorrect :{item.correctOrIncorrect}</p>
                   </div>
                 </Fragment>
               ))}
             </Fragment>
-            </>) : '' 
-           
-          // <Fragment key={item.id}>
-          //      {item.info.userAnswers.map((item) => (
-          //       <Fragment key={item.questionID}>
-          //         <div className="card">
-          //           <p>Question Number :{item.questionNum}</p>
-          //           <p>Correct Answer :{item.correctAnswer}</p>
-          //           <p>Your Answer:{item.givenAnswer}</p>
-          //           <p style={{color:'blue'}}>Correct or incorrect :{item.correctOrIncorrect}</p>
-          //         </div>
-          //       </Fragment>
-          //     ))}
-          //   </Fragment>
-       
+          </>)
 
-        ))}
+
+
+        ))} */}
       </div>
     </>
   );
