@@ -37,10 +37,10 @@ const Questions = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log( question);
-    console.log(inputValue);
+ 
 
     await addDoc(collection(FIRESTORE, "QuizQuestions"), {
-      inputValue ,
+     
       ...question,
       ...option,
       ...answer,
@@ -56,6 +56,7 @@ const Questions = () => {
  
   return (
     <>
+   
       <form
         style={{
           display: "flex",
@@ -65,7 +66,9 @@ const Questions = () => {
         }}
       >
         <div className="card" style={{ margin: "10px", padding: "30px" }}>
-          
+        <h2>Write a question and submit it to firebase.</h2>
+
+        <label htmlFor="">Question:</label>
           <textarea
             id="w3review"
             name="question"
@@ -75,12 +78,16 @@ const Questions = () => {
             onChange={handleQuestion}
           />
 
+         <label htmlFor="">Options:</label>
+          <div className="options" >
           {optionNum.map((item) => (
             <div key={item}>
-              {item}.<input type="text" onChange={handleOption} name={item} />
+              {item}. <input type="text" onChange={handleOption} name={item} style= {{margin:'2px 0' , width :'70%'}}/>
             </div>
           ))}
+          </div>
 
+          <label htmlFor="">Answer (a,b,c,d) :</label>
           <input type="text" name="answer" onChange={handleAnswer} />
         </div>
 
