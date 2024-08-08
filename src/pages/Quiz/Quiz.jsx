@@ -29,6 +29,7 @@ const Quiz = () => {
     if (localData) {
       setIsLoggedIn(true);
       handleGetQuestions();
+      handleGetUserAnswers();
     }
   }, []);
 
