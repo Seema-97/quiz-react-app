@@ -11,27 +11,29 @@ import Home from './pages/Home/Home'
 import Questions from './pages/Questions/Questions'
 import Quiz from './pages/Quiz/Quiz'
 import Attempts from './pages/Attempts/Attempts'
+import AttemptView from './pages/AttemptView/AttemptView'
 
 function App() {
-  
+
 
   return (
     <>
-     {/* <Quiz1/> */}
-     {/* <Quiz2 /> */}
-     {/* <Quiz3 /> */}
+      {/* <Quiz1/> */}
+      {/* <Quiz2 /> */}
+      {/* <Quiz3 /> */}
 
       <Header />
 
-     <Routes>
-      <Route path='/home' element ={<Home/>}/>
-      <Route path='/questions' element ={<Questions/>}/>
-      <Route path='/quiz' element ={<Quiz/>}/>
-      <Route path='/attempts' element ={<Attempts/>}/>
-     </Routes> 
+      <Routes>
+        <Route path='/home' element={<Home />} />
+        <Route path='/questions' element={<Questions />} />
+        <Route path='/quiz' element={<Quiz />} />
+        <Route path='/attempts' element={<Attempts />} />
+        <Route path='/attempts/:attemptID' element={<AttemptView />} />
+      </Routes>
 
-    
-   
+
+
     </>
   )
 }
