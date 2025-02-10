@@ -4,7 +4,7 @@ import { useState } from "react"
 
 
 // eslint-disable-next-line react/prop-types
-const ResultsCard = ({ showAnswer }) => {
+const ResultsCard = ({ showAttempts }) => {
 
     let navigate = useNavigate()
     const handleAttemptPage = (item) => {
@@ -19,12 +19,12 @@ const ResultsCard = ({ showAnswer }) => {
         setAttemptData(item);
     }
 
-    // console.log(attemptData)
+    console.log(showAttempts)
 
     return (
         <div className="d-flex flex-wrap justify-content-center gap-4 mt-4">
             {/* eslint-disable-next-line react/prop-types */}
-            {showAnswer.map(item => (
+            {(showAttempts.length > 0 )? showAttempts.map(item => (
                 <div key={item.id} className="card" style={{ width: "16rem" }}>
                     <div className="card-body">
                         <h5 className="card-title">Quiz ID: {item?.id}</h5>
@@ -43,10 +43,10 @@ const ResultsCard = ({ showAnswer }) => {
 
                         <Modal attemptData={attemptData} />
 
-
                     </div>
                 </div>
-            ))}
+            )) : <p>No attempt found...Please start playing</p>
+            }
         </div>
     )
 }

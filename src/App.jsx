@@ -7,10 +7,9 @@ import './App.css'
 // import Quiz3 from './components/QuizApp/Quiz3/Quiz3'
 
 import Header from './components/Header/Header'
-import Home from './pages/Home/Home'
+// import Home from './pages/Home/Home'
 import Questions from './pages/Questions/Questions'
-import Quiz from './pages/Quiz/Quiz'
-import Attempts from './pages/Attempts/Attempts'
+import Home from './pages/Home/Home'
 import AttemptView from './pages/AttemptView/AttemptView'
 
 function App() {
@@ -18,20 +17,16 @@ function App() {
 
   return (
     <>
-      {/* <Quiz1/> */}
-      {/* <Quiz2 /> */}
-      {/* <Quiz3 /> */}
-
+    
       <Header />
 
+      <div style={{backgroundColor:'rgb(246, 255, 246)' , minHeight:'100vh'}}>
       <Routes>
-        <Route path='/home' element={<Home />} />
         <Route path='/questions' element={<Questions />} />
-        <Route path='/quiz' element={<Quiz />} />
-        <Route path='/attempts' element={<Attempts />} />
-        <Route path='/attempts/:attemptID' element={<AttemptView />} />
+        <Route path='/' element={<Home />} />
+        <Route path='attempts/:attemptID' element={<AttemptView />} />
       </Routes>
-
+      </div>
 
 
     </>

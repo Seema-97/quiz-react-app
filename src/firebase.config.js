@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp , getApps ,getApp} from "firebase/app";
+import { getAuth } from "firebase/auth";
 import {getFirestore} from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -17,6 +18,9 @@ const firebaseConfig = {
 // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 
-export const APP = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig) ;
+export const APP = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig) ; 
 
-export const FIRESTORE = getFirestore(APP) ;
+export const FIRESTORE = getFirestore(APP) ; //The getFirestore() method gives you access to the Firestore database instance.
+export const auth = getAuth(); 
+//the auth object in Firebase stores the authenticated user’s details, such as the user ID, email, and other profile data.
+//It keeps track of the user's authentication state, so you can react to changes (e.g., when a user logs in or logs out) using methods like onAuthStateChanged. 
